@@ -5,6 +5,8 @@ extends: _layouts.documentation
 section: content
 toc: |
   - [Columns](#columns)
+    - [Boolean](#columns-boolean)
+    - [Icon](#columns-icon)
     - [Image](#columns-image)
     - [Text](#columns-text)
   - [Filters](#filters)
@@ -36,10 +38,12 @@ public static function table(Table $table)
                     'organization' => 'Organization',
                 ]),
             Columns\Text::make('birthday')->date(),
+            Columns\Boolean::make('is_active')->label('Active?'),
         ])
         ->filters([
             Filter::make('individuals', fn ($query) => $query->where('type', 'individual')),
             Filter::make('organizations', fn ($query) => $query->where('type', 'organization')),
+            Filter::make('active', fn ($query) => $query->where('is_active', true)),
         ]);
 }
 ```
@@ -66,6 +70,36 @@ Column::make('customer.name');
 ```
 
 This would check for a `customer` relationship on the parent model and output the related customer's name.
+
+### Boolean {#columns-boolean}
+
+The `trueIcon()` and `falseIcon()` methods support the name of any Blade icon component, and passes a set of formatting classes to it. By default, the [Blade Heroicons](https://github.com/blade-ui-kit/blade-heroicons) package is installed, so you may use the name of any [Heroicon](https://heroicons.com) out of the box. However, you may create your own custom icon components or install an alternative library if you wish.
+
+```php
+Boolean::make($name)
+    ->falseIcon($icon = 'heroicon-o-x-circle') // Set the icon that should be displayed when the cell is false.
+    ->trueIcon($icon = 'heroicon-s-check-circle'); // Set the icon that should be displayed when the cell is true.
+```
+
+### Icon {#columns-icon}
+
+The `options()` method supports the names of any Blade icon components, and passes a set of formatting classes to them. By default, the [Blade Heroicons](https://github.com/blade-ui-kit/blade-heroicons) package is installed, so you may use the name of any [Heroicon](https://heroicons.com) out of the box. However, you may create your own custom icon components or install an alternative library if you wish.
+
+```php
+Icon::make($name)
+    ->options($options = []); // Set the icon that should be displayed when the cell is a given value.
+```
+
+Here is an example usage of this column:
+
+```php
+Icon::make('status')
+    ->options([
+        'accepted' => 'heroicon-s-check-circle', // When the `status` is `accepted`, render the `check-circle` Heroicon.
+        'declined' => 'heroicon-x-circle', // When the `status` is `declined`, render the `x-circle` Heroicon.
+        'pending' => 'heroicon-s-clock', // When the `status` is `pending`, render the `clock` Heroicon.
+    ]);
+```
 
 ### Image {#columns-image}
 
