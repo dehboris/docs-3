@@ -52,7 +52,22 @@ return [
         ],
     ],
     'Navigation' => '/docs/navigation',
-    'Theming' => '/docs/theming',
-    'Plugin Development' => '/docs/plugin-development',
+    'Theming' => [
+        'url' => '/docs/theming',
+        'children' => [
+            'Registering a Theme' => '/docs/theming#registering-a-theme',
+        ],
+    ],
+    'Plugin Development' => [
+        'url' => '/docs/plugin-development',
+        'children' => [
+            'Registering Plugins' => '/docs/plugin-development#registering-plugins',
+            'Registering Resources' => '/docs/plugin-development#registering-resources',
+            'Registering Pages' => '/docs/plugin-development#registering-pages',
+            'Registering Widgets' => '/docs/plugin-development#registering-widgets',
+            'Registering Roles' => '/docs/plugin-development#registering-roles',
+            'Frontend Assets' => '/docs/plugin-development#frontend-assets',
+        ],
+    ],
     'Development Roadmap' => '/docs/roadmap',
 ];
