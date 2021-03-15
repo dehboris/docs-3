@@ -11,6 +11,7 @@ toc: |
     - [Icon](#columns-icon)
     - [Image](#columns-image)
     - [Text](#columns-text)
+    - [Developing Custom Column Types](#columns-custom-development)
   - [Filters](#filters)
     - [Reusable Filters](#filters-reusable)
   - [Context Customization](#context-customization)
@@ -155,6 +156,21 @@ Text::make($name)
 ```
 
 > Other column types are coming soon. For more information, please see our [Development Roadmap](/docs/roadmap).
+
+### Developing Custom Column Types {#columns-custom-development}
+
+To create a new column type, which may be used in any table, you may generate a class and cell view using:
+
+```bash
+php artisan make:filament-column Avatar --resource
+```
+
+Alternatively, simple custom columns may be created using a `View` component, and passing the name of a cell `$view` in your app:
+
+```php
+Columns\View::make($view)
+    ->data($data = []); // Set the key-value array of available data that the view has access to.
+```
 
 ## Filters {#filters}
 
