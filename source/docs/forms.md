@@ -24,6 +24,7 @@ toc: |
       - [Group](#layout-group)
   - [Dependent Fields](#dependent-fields)
   - [Context Customization](#context-customization)
+  - [Developing Custom Components](#custom-development)
 ---
 
 # Building Forms
@@ -555,3 +556,25 @@ public static function form(Form $form)
 In this example, the `name` field will be required, `except()` on the `EditCustomer` page.
 
 This is an incredibly powerful pattern, and allows you to completely customize a form contextually by chaining as many methods as you wish to the callback.
+
+## Developing Custom Components {#custom-development}
+
+To create a custom field, you may use:
+
+```bash
+php artisan make:filament-field CountrySelect --resource
+```
+
+This will create a new custom class and view for your field, which you may use in a form in the same way as any other field.
+
+To create a generic form component, which may be commonly used for custom layouts, you may generate a class and view using:
+
+```bash
+php artisan make:filament-form-component SidebarLayout --resource
+```
+
+Alternatively, simple custom layouts may be created using a `View` component, and passing the name of a `$view` in your app:
+
+```php
+Components\View::make($view);
+```
