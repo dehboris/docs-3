@@ -16,6 +16,7 @@ section: content
 - Switch
 
 ## Table Filters
+
 - Filter parameters.
 - Applying more than one filter at once.
 

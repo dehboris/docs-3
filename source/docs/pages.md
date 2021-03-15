@@ -62,8 +62,6 @@ public static function authorization()
 }
 ```
 
-> Action-specific role authorization is coming soon. For more information, please see our [Development Roadmap](/docs/roadmap).
-
 ## Customization {#customization}
 
 Filament will automatically generate a title, navigation label and URL (slug) for your page based on its name. You may override it using static properties of your page class:

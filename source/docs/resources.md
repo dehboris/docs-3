@@ -9,11 +9,11 @@ toc: |
     - [Managing Single Related Records](#relations-single)
     - [Managing Multiple Related Records](#relations-multiple)
   - [Tables](#tables)
-  - [Authorization](#authorization)
   - [Pages](#pages)
     - [Customizing Default Pages](#pages-customization)
       - [Hooks](#pages-customization-hooks)
     - [Custom Pages](#pages-custom)
+  - [Authorization](#authorization)
 ---
 
 # Resources
@@ -185,48 +185,6 @@ Filters are predefined scopes that administrators can use to filter records in y
 
 For more information, please see the page on [Building Tables](/docs/tables).
 
-## Authorization {#authorization}
-
-You may create roles for users of Filament that allow them to access specific resources. You may create a `Manager` role using:
-
-```php
-php artisan make:filament-role Manager
-```
-
-Administrators will now be able to assign this role to any Filament user using the admin panel.
-
-To only allow users with the `Manager` role to access this resource, declare so in the static `authorization()` method:
-
-```php
-use App\Filament\Roles;
-
-public static function authorization()
-{
-    return [
-        Roles\Manager::allow(),
-    ];
-}
-```
-
-You may authorize as many roles as you wish.
-
-> Please note: administrators will always have full access to every resource in your admin panel.
-
-You may want to only deny users with the `Manager` role from accessing this resource. To do this, you may use the static `deny()` method instead:
-
-```php
-use App\Filament\Roles;
-
-public static function authorization()
-{
-    return [
-        Roles\Manager::deny(),
-    ];
-}
-```
-
-> Action-specific role authorization is coming soon. For more information, please see our [Development Roadmap](/docs/roadmap).
-
 ## Pages {#pages}
 
 Pages are classes that are associated with a resource. They are essentially [Laravel Livewire](https://laravel-livewire.com) components with custom integration utilities for use with Filament.
@@ -380,4 +338,74 @@ To generate a URL for a resource route, you may call the static `generateUrl()` 
 
 ```php
 SortCustomers::generateUrl($parameters = [], $absolute = true);
+```
+
+## Authorization {#authorization}
+
+For authorization, Filament will observe any [model policies](https://laravel.com/docs/authorization#creating-policies) that are registered in your app. The `viewAny` action may be used to completely disable resources and remove them from the navigation menu.
+
+Filament also includes a powerful role-based authorization system, which is set up out of the box with the default users table. You may also implement roles functionality in a [custom users table](/docs#users).
+
+You may create roles, such as `Manager`, using:
+
+```php
+php artisan make:filament-role Manager
+```
+
+Administrators will now be able to assign this role to any Filament user through the admin panel.
+
+To only allow users with the `Manager` role to access a resource, declare so in the static `authorization()` method:
+
+```php
+use App\Filament\Roles;
+
+public static function authorization()
+{
+    return [
+        Roles\Manager::allow(),
+    ];
+}
+```
+
+You may authorize as many roles as you wish.
+
+> Please note: administrators will always have full access to every resource in your admin panel.
+
+You may want to only deny users with the `Manager` role from accessing this resource. To do this, you may use the static `deny()` method instead:
+
+```php
+use App\Filament\Roles;
+
+public static function authorization()
+{
+    return [
+        Roles\Manager::deny(),
+    ];
+}
+```
+
+You may specify `only()` certain actions that roles have access to. These follow the same naming conventions as methods in a [policy](https://laravel.com/docs/authorization#policy-methods).
+
+```php
+use App\Filament\Roles;
+
+public static function authorization()
+{
+    return [
+        Roles\Manager::allow()->only(['viewAny', 'create']),
+    ];
+}
+```
+
+There is also the possibility to allow access to all actions `except()` those specified:
+
+```php
+use App\Filament\Roles;
+
+public static function authorization()
+{
+    return [
+        Roles\Manager::allow()->except(['delete']),
+    ];
+}
 ```
