@@ -6,6 +6,7 @@ section: content
 toc: |
   - [Configuration](#configuration)
   - [Users](#users)
+    - [Disabling the Default Migrations](#users-disabling-default-migrations)
   - [Stubs](#stubs)
   - [Upgrade Guide](#upgrade-guide)
 ---
@@ -44,6 +45,8 @@ php artisan vendor:publish --tag=filament-config
 ```
 
 > If you have published the configuration file for Filament, please ensure that you republish it when you upgrade.
+
+You may wish to cu
 
 ## Users {#users}
 
@@ -105,6 +108,18 @@ public function isFilamentAdmin()
     return $this->email === 'dan@danharrin.com';
 }
 ```
+
+### Disabling the Default Migrations {#users-disabling-default-migrations}
+
+You may wish to prevent the migration for the default users table from being registered. You may do this by calling:
+
+```php
+use Filament\Filament;
+
+Filament::ignoreMigrations();
+```
+
+from the `boot()` method of your `AppServiceProvider`.
 
 ## Stubs {#stubs}
 

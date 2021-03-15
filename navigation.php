@@ -26,6 +26,7 @@ return [
             'Fields' => '/docs/forms#fields',
             'Validation' => '/docs/forms#validation',
             'Layout' => '/docs/forms#layout',
+            'Dependent Fields' => '/docs/forms#dependent-fields',
             'Context Customization' => '/docs/forms#context-customization',
         ],
     ],

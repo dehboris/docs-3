@@ -12,6 +12,7 @@ toc: |
     - [Image](#columns-image)
     - [Text](#columns-text)
   - [Filters](#filters)
+    - [Reusable Filters](#filters-reusable)
   - [Context Customization](#context-customization)
 ---
 
@@ -149,6 +150,7 @@ Text::make($name)
     ->dateTime($format = 'F j, Y H:i:s') // Format values in this column as date-times, using PHP date formatting tokens.
     ->default() // Set the default value for when this field does not exist.
     ->formatUsing($callback = fn ($value) => $value) // Set the callback used to format the value of the column.
+    ->limit($limit) // Truncate the value of this column to a certain number of characters.
     ->options($options = []); // Set the key-value array of available values that this column could hold.
 ```
 
@@ -159,7 +161,7 @@ Text::make($name)
 Filters are used to scope results in the table. Here is an example of a filter at allows only customers with a `type` of `individual` to be shown in the table:
 
 ```php
-Filter::make('individuals', fn ($query) => $query->where('type', 'individual')),
+Filter::make('individuals', fn ($query) => $query->where('type', 'individual'));
 ```
 
 They have access to the following customization options:
@@ -167,6 +169,48 @@ They have access to the following customization options:
 ```php
 Filter::make($name, $callback = fn ($query) => $query)
     ->label($label); // Set custom label text for with the filter, which is otherwise automatically generated based on its name. It supports localization strings.
+```
+
+### Reusable Filters {#filters-reusable}
+
+You may wish to create a filter that you may reuse across multiple tables.
+
+To create a reusable filter, you may use the following command:
+
+```bash
+php artisan make:filament-filter ActiveFilter --resource
+```
+
+This will create a new filter in the `app/Filament/Resources/Tables/Filters` directory:
+
+```php
+<?php
+
+namespace App\Filament\Resources\Tables\Filters;
+
+use Filament\Tables\Filter;
+
+class ActiveFilter extends Filter
+{
+    protected function setUp()
+    {
+        $this->name('active');
+    }
+
+    public function apply($query)
+    {
+        return $query;
+    }
+}
+```
+
+You may modify the filter's query in the `apply()` method of that class:
+
+```php
+public function apply($query)
+{
+    return $query->where('is_active', true);
+}
 ```
 
 > Currently, filters are static and only one may be applied at a time. Parameter-based filters and support for applying multiple filters at once is coming soon. For more information, please see our [Development Roadmap](/docs/roadmap).

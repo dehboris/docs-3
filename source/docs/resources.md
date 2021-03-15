@@ -91,7 +91,15 @@ This example assumes the following:
 - A `belongsTo()` `category` relationship on your parent model.
 - A `name` column on your category model that can be used to render the list of categories to select from.
 
-You may customize the [Query Builder](https://laravel.com/docs/queries) used to get search results by specifying a callback in the third parameter of the `relationship()` method.
+Sometimes, having a lot of related records as options can cause strain on your web browser. By default, options will only load when you start typing a search. To change this, you may `preload()` a select field with options. Please only do this if you are certain that there are only a few related records to choose from:
+
+```php
+Components\BelongsToSelect::make('category_id')
+    ->relationship('category', 'name')
+    ->preload();
+```
+
+You may also customize the [Query Builder](https://laravel.com/docs/queries) used to get search results by specifying a callback in the third parameter of the `relationship()` method.
 
 ```php
 Components\BelongsToSelect::make('category_id')
