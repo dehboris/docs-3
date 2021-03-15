@@ -52,7 +52,7 @@ return [
         ],
     ],
     'Navigation' => '/docs/navigation',
-    'Theming' => '/docs/theming',
-    'Plugin Development' => '/docs/plugin-development',
+//    'Theming' => '/docs/theming',
+//    'Plugin Development' => '/docs/plugin-development',
     'Development Roadmap' => '/docs/roadmap',
 ];
