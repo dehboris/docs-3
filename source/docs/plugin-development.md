@@ -123,7 +123,7 @@ class ExampleServiceProvider extends PluginServiceProvider
 
 Filament will automatically register your `Widget` and ensure that Livewire can discover it.
 
-## Roles {#registering-role}
+## Roles {#registering-roles}
 
 To register a custom role, add the fully qualified class name to the `protected $roles` array in your service provider.
 
