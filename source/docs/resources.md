@@ -12,6 +12,7 @@ toc: |
   - [Authorization](#authorization)
   - [Pages](#pages)
     - [Customizing Default Pages](#pages-customization)
+      - [Hooks](#pages-customization-hooks)
     - [Custom Pages](#pages-custom)
 ---
 
@@ -238,6 +239,109 @@ For further customization opportunities, you can override the static `$view` pro
 
 ```php
 public static $view = 'customers.list-records';
+```
+
+#### Hooks {#pages-customization-hooks}
+
+Hooks may be used to customize the behaviour of a default page. To set up a hook, create a protected method on the page class with the name of the hook:
+
+```php
+protected function beforeSave()
+{
+    // ...
+}
+```
+
+In this example, the code in the `beforeSave()` method will be called before the data in the form is saved to the database.
+
+There are several available hooks for the create and edit pages:
+
+```php
+use Filament\Resources\Pages\CreateRecord;
+
+class CreateCustomer extends CreateRecord
+{
+    // ...
+    
+    protected function beforeFill()
+    {
+        // Runs before the form fields are populated with their default values.
+    }
+    
+    protected function afterFill()
+    {
+        // Runs after the form fields are populated with their default values.
+    }
+    
+    protected function beforeValidate()
+    {
+        // Runs before the form fields are validated when the form is submitted.
+    }
+    
+    protected function afterValidate()
+    {
+        // Runs after the form fields are validated when the form is submitted.
+    }
+    
+    protected function beforeCreate()
+    {
+        // Runs before the form fields are saved to the database.
+    }
+    
+    protected function afterCreate()
+    {
+        // Runs after the form fields are saved to the database.
+    }
+}
+```
+
+```php
+use Filament\Resources\Pages\EditRecord;
+
+class EditCustomer extends EditRecord
+{
+    // ...
+    
+    protected function beforeFill()
+    {
+        // Runs before the form fields are populated from the database.
+    }
+    
+    protected function afterFill()
+    {
+        // Runs after the form fields are populated from the database.
+    }
+    
+    protected function beforeValidate()
+    {
+        // Runs before the form fields are validated when the form is saved.
+    }
+    
+    protected function afterValidate()
+    {
+        // Runs after the form fields are validated when the form is saved.
+    }
+    
+    protected function beforeSave()
+    {
+        // Runs before the form fields are saved to the database.
+    }
+    
+    protected function afterSave()
+    {
+        // Runs after the form fields are saved to the database.
+    }
+    
+    protected function beforeDelete()
+    {
+        // Runs before the record is deleted.
+    }
+    
+    protected function afterDelete()
+    {
+        // Runs after the record is deleted.
+    }
+}
 ```
 
 ### Custom Pages {#pages-custom}
