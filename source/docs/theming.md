@@ -97,7 +97,7 @@ To customise a color, uncomment the appropriate line in the CSS file and replace
 
 ## Registering a Theme {#registering-a-theme}
 
-Once you've registered your theme, you should register it using the `Filament::serving` and `Filament::style` methods inside the `boot` method of a service provider:
+Once you've created your theme, you should register it using the `Filament::serving` and `Filament::registerStyle` methods inside the `boot` method of a service provider:
 
 ```php
 use Filament\Filament;
@@ -107,7 +107,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Filament::serving(function () {
-            Filament::style('my-custom-theme', resource_path('css/filament/name-of-theme.css'));
+            Filament::registerStyle('my-custom-theme', resource_path('css/filament/name-of-theme.css'));
         });
     }
 }
