@@ -5,6 +5,8 @@ extends: _layouts.documentation
 section: content
 toc: |
   - [Columns](#columns)
+    - [Displaying Relationship Data](#columns-displaying-relationship-data)
+    - [Calling Actions](#columns-calling-actions)
     - [Boolean](#columns-boolean)
     - [Icon](#columns-icon)
     - [Image](#columns-image)
@@ -56,12 +58,16 @@ All columns have access to the following customization methods:
 
 ```php
 Column::make($name)
+    ->action($action) // Set Livewire action that should be called when this column is clicked. The current record key will be passed in as a parameter.
     ->getValueUsing($callback = fn ($record) => $record->getAttribute('{column name}')) // Set the callback used to retrieve the value of the column from a given record.
     ->label($label) // Set custom label text for with the column header, which is otherwise automatically generated based on its name. It supports localization strings.
     ->primary() // Sets the column as primary, which emphasises it and links to access a record.
     ->searchable() // Allows the values in this column to be searched.
-    ->sortable(); // Allows the values in this column to be sorted.
+    ->sortable() // Allows the values in this column to be sorted.
+    ->url($url, $shouldOpenInNewTab = false); // Set URL callback that should be used to generate a URL to send the user to when this column is clicked.
 ```
+
+### Displaying Relationship Data {#columns-displaying-relationship-data}
 
 You set up columns that display results from a related model using dot syntax in its name:
 
@@ -70,6 +76,28 @@ Column::make('customer.name');
 ```
 
 This would check for a `customer` relationship on the parent model and output the related customer's name.
+
+### Calling Actions {#columns-calling-actions}
+
+You may want something to happen when a cell is clicked. Usually, this is opening a URL, or running a custom Livewire action.
+
+To open a URL when a cell is clicked, a callback is used to generate the destination. For example:
+
+```php
+Column::make('website')
+    ->url(fn ($record) => $record->website, true);
+```
+
+Cells of the above column will display the contents of the record's `website`, and redirect the user to it when they click. The second parameter to `url()`, `true`, means that the website will open in a new tab when clicked.
+
+Alternatively, you may specify a custom Livewire action that should run when the column is clicked. The primary key of the clicked record will be passed as a parameter to the action:
+
+```php
+Column::make('username')
+    ->action('editUsername');
+```
+
+Cells of the above column will call the `editUsername()` Livewire action when clicked.
 
 ### Boolean {#columns-boolean}
 
@@ -116,14 +144,12 @@ Image::make($name)
 
 ```php
 Text::make($name)
-    ->action($action) // Set Livewire action that should be called when this column is clicked. The current record key will be passed in as a parameter.
     ->currency($symbol = '$', $decimalSeparator = '.', $thousandsSeparator = ',') // Format values in this column as if they were currency.
     ->date($format = 'F j, Y') // Format values in this column as dates, using PHP date formatting tokens.
     ->dateTime($format = 'F j, Y H:i:s') // Format values in this column as date-times, using PHP date formatting tokens.
     ->default() // Set the default value for when this field does not exist.
     ->formatUsing($callback = fn ($value) => $value) // Set the callback used to format the value of the column.
-    ->options($options = []) // Set the key-value array of available values that this column could hold.
-    ->url($url); // Set URL callback that should be used to generate a URL to send the user to when this column is clicked.
+    ->options($options = []); // Set the key-value array of available values that this column could hold.
 ```
 
 > Other column types are coming soon. For more information, please see our [Development Roadmap](/docs/roadmap).

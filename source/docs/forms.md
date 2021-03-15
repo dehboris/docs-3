@@ -18,9 +18,11 @@ toc: |
   - [Validation](#validation)
   - [Layout](#layout)
       - [Grid](#layout-grid)
-      - [Sections](#layout-sections)
+      - [Section](#layout-section)
       - [Fieldset](#layout-fieldset)
       - [Tabs](#layout-tabs)
+      - [Group](#layout-group)
+  - [Dependent Fields](#dependent-fields)
   - [Context Customization](#context-customization)
 ---
 
@@ -66,6 +68,7 @@ All field components have access to the following customization methods:
 Field::make($name)
     ->columnSpan($span = 1) // On large devices, this sets the number of columns that the field should span in the form.
     ->default($default) // Sets the default value for this field.
+    ->dependable() // Reloads the form when this field is changed.
     ->disabled($disabled = false) // Make the field read-only.
     ->extraAttributes($attributes = []) // A key-value array of extra HTML attributes to pass to the field.
     ->helpMessage($message) // Sets an optional message below the field. It supports Markdown.
@@ -291,7 +294,7 @@ public static function form(Form $form)
 }
 ```
 
-### Sections {#layout-sections}
+### Section {#layout-section}
 
 You may want to separate your fields into sections, each with a heading and subheading. To do this, you can use a Section component:
 
@@ -358,7 +361,7 @@ public static function form(Form $form)
 
 ### Fieldset {#layout-fieldset}
 
-You may want to group fields into into a Fieldset. Each fieldset has a label, a border, and a two-column grid:
+You may want to group fields into a Fieldset. Each fieldset has a label, a border, and a two-column grid:
 
 ```php
 use Filament\Resources\Forms\Components;
@@ -454,6 +457,62 @@ public static function form(Form $form)
                 ]),
         ]);
 }
+```
+
+### Group {#layout-group}
+
+Groups are used to wrap multiple associated form components. They have no effect on the form visually, but are useful for applying modifications to many fields at once:
+
+```php
+use Filament\Resources\Forms\Components;
+use Filament\Resources\Forms\Form;
+
+public static function form(Form $form)
+{
+    return $form
+        ->schema([
+            // ...
+            Components\Group::make([
+                // ...
+            ]),
+        ]);
+}
+```
+
+## Dependent Fields {#dependent-fields}
+
+Dependent fields are fields that are modified based on the value of another. For example, you could show a group of fields based on the value of a Select.
+
+The first step to setting up dependent fields is to apply the `dependable()` method to the field that should be watched for changes. When the value of this field is changed, the whole form will reload:
+
+```php
+Components\Select::make('type')
+    ->placeholder('Select a type')
+    ->options([
+        'individual' => 'Individual',
+        'organization' => 'Organization',
+    ])
+    ->dependable();
+```
+
+To modify fields based on the value of another, you may use the `when()` method. The first argument to this method is a callback that evaluates the `$record` object, and returns true or false depending on if the modifications should be applied. The second argument makes modifications to the current field. If no second argument is supplied, the field will only be shown when the callback in the first argument is true:
+
+In this example, the fields in the [group](#layout-group) will only be shown when the `type` field is set to `individual`:
+
+```php
+Components\Group::make([
+    // ...
+])->when(fn ($record) => $record->type === 'individual');
+```
+
+Here, the `company_number` field will only be required when the `type` field is set to `organization`:
+
+```php
+Components\TextInput::make('company_number')
+    ->when(
+        fn ($record) => $record->type === 'organization',
+        fn ($field) => $field->required(),
+    );
 ```
 
 ## Context Customization {#context-customization}
