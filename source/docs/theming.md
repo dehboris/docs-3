@@ -114,3 +114,5 @@ class AppServiceProvider extends ServiceProvider
     }
 }
 ```
+
+> Wrapping your style, script and script data related calls in `Filament::serving` ensures that they will only be run when Filament is being used.
