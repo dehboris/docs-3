@@ -3,6 +3,8 @@ title: Theming
 description:
 extends: _layouts.documentation
 section: content
+toc: |
+  - [Registering a Theme](#registering-a-theme)
 ---
 
 # Theming
