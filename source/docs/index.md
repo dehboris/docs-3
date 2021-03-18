@@ -119,7 +119,7 @@ use Filament\Filament;
 Filament::ignoreMigrations();
 ```
 
-from the `boot()` method of your `AppServiceProvider`.
+from the `register()` method of your `AppServiceProvider`.
 
 ## Stubs {#stubs}
 
