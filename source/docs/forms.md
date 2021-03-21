@@ -9,6 +9,8 @@ toc: |
       - [Date Picker](#fields-date-picker)
       - [Date-time Picker](#fields-date-time-picker)
       - [File Upload](#fields-file-upload)
+      - [Markdown Editor](#fields-markdown-editor)
+        - [Toolbar Buttons](#fields-markdown-editor-toolbar-buttons)
       - [Rich Editor](#fields-rich-editor)
           - [Toolbar Buttons](#fields-rich-editor-toolbar-buttons)
       - [Select](#fields-select)
@@ -136,6 +138,34 @@ FileUpload::make($name)
 ```
 
 > Support for multiple file uploads is coming soon. For more information, please see our [Development Roadmap](/docs/roadmap).
+
+### Markdown Editor {#fields-markdown-editor}
+
+```php
+MarkdownEditor::make($name)
+    ->attachmentDisk($disk) // Set a custom disk that uploaded attachments should be read from and written to.
+    ->attachmentDirectory($directory) // Set a custom directory that uploaded attachments should be written to.
+    ->autofocus() // Autofocus the field.
+    ->disableAllToolbarButtons() // Disable all toolbar buttons.
+    ->disableToolbarButtons($buttons = []) // Disable toolbar buttons. See below for options.
+    ->enableToolbarButtons($buttons = []) // Enable toolbar buttons. See below for options.
+    ->placeholder($placeholder); // Set the placeholder for when the field is empty. It supports localization strings.
+```
+
+#### Toolbar Buttons {#fields-markdown-editor-toolbar-buttons}
+
+```
+attachFiles
+bold
+bullet
+code
+italic
+link
+number
+preview
+strike
+write
+```
 
 ### Rich Editor {#fields-rich-editor}
 
