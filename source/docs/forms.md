@@ -408,6 +408,50 @@ public static function form(Form $form)
 }
 ```
 
+Sections may be `collapsible()` to optionally hide content in long forms:
+
+```php
+use Filament\Resources\Forms\Components;
+use Filament\Resources\Forms\Form;
+
+public static function form(Form $form)
+{
+    return $form
+        ->schema([
+            // ...
+            Components\Section::make(
+                'Heading',
+                'Subheading',
+                [
+                    // ...
+                ],
+            )->collapsible(),
+        ]);
+}
+```
+
+You may `collapse()` sections by default:
+
+```php
+use Filament\Resources\Forms\Components;
+use Filament\Resources\Forms\Form;
+
+public static function form(Form $form)
+{
+    return $form
+        ->schema([
+            // ...
+            Components\Section::make(
+                'Heading',
+                'Subheading',
+                [
+                    // ...
+                ],
+            )->collapsed(),
+        ]);
+}
+```
+
 ### Fieldset {#layout-fieldset}
 
 You may want to group fields into a Fieldset. Each fieldset has a label, a border, and a two-column grid:
