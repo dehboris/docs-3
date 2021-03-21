@@ -9,6 +9,7 @@ toc: |
       - [Date Picker](#fields-date-picker)
       - [Date-time Picker](#fields-date-time-picker)
       - [File Upload](#fields-file-upload)
+      - [Key-value](#fields-key-value)
       - [Markdown Editor](#fields-markdown-editor)
         - [Toolbar Buttons](#fields-markdown-editor-toolbar-buttons)
       - [Rich Editor](#fields-rich-editor)
@@ -138,6 +139,23 @@ FileUpload::make($name)
 ```
 
 > Support for multiple file uploads is coming soon. For more information, please see our [Development Roadmap](/docs/roadmap).
+
+### Key-value {#fields-key-value}
+
+```php
+KeyValue::make($name)
+    ->addButtonLabel($label) // Set the add button label. It supports localization strings.
+    ->deleteButtonLabel($label) // Set the delete button label. It supports localization strings.
+    ->disableAddingRows($state = false) // Disable the addition of rows.
+    ->disableDeletingRows($state = false) // Disable the deletion of rows.
+    ->disableEditingKeys($state = false) // Disable the editing of keys.
+    ->keyLabel($label) // Set the key field label label. It supports localization strings.
+    ->keyPlaceholder($placeholder) // Set the key field placeholder. It supports localization strings.
+    ->sortable($sortable = true) // Allow the keys to be sorted using drag and drop.
+    ->sortButtonLabel($label) // Set the sort button label. It supports localization strings.
+    ->valueLabel($label) // Set the value field label label. It supports localization strings.
+    ->valuePlaceholder($placeholder); // Set the value field placeholder. It supports localization strings.
+```
 
 ### Markdown Editor {#fields-markdown-editor}
 
