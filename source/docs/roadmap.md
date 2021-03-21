@@ -9,7 +9,6 @@ section: content
 
 ## Additional Form Field Types
 
-- Markdown editor
 - JSON and relationship-based multi-select
 - JSON array-powered field repeater
 - Block-based page builder
