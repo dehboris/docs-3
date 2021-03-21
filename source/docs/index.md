@@ -46,8 +46,6 @@ php artisan vendor:publish --tag=filament-config
 
 > If you have published the configuration file for Filament, please ensure that you republish it when you upgrade.
 
-You may wish to cu
-
 ## Users {#users}
 
 By default, Filament includes its own authentication guard and users table that is completely separate from your app's users table. This enables you to get up and running with Filament at record speed.
