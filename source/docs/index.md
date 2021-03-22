@@ -137,5 +137,6 @@ To upgrade Filament to the latest version, you must run the following commands:
 composer update
 php artisan migrate
 php artisan livewire:discover
+php artisan route:clear
 php artisan view:clear
 ```
