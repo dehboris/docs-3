@@ -9,7 +9,7 @@ mix
   .js('source/_assets/js/main.js', 'js')
   .css('source/_assets/css/main.css', 'css', [
     require('postcss-import'),
-    require('tailwindcss'),
+    require('@tailwindcss/jit'),
   ])
   .options({
     processCssUrls: false,

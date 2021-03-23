@@ -49,9 +49,6 @@ module.exports = {
       }),
     },
   },
-  variants: {
-    extend: {},
-  },
   corePlugins: {
     container: false,
   },

@@ -9,14 +9,15 @@
   },
   "devDependencies": {
     "@ryangjchandler/alpine-clipboard": "^1.0.0",
+    "@tailwindcss/jit": "^0.1.7",
     "@tailwindcss/typography": "^0.4.0",
     "alpinejs": "^2.8.1",
     "focus-visible": "^5.2.0",
     "laravel-mix": "^6.0.13",
     "laravel-mix-jigsaw": "^1.5.0",
-    "postcss": "^8.2.6",
+    "postcss": "^8.2.8",
     "postcss-import": "^14.0.0",
     "prettier": "^2.2.1",
-    "tailwindcss": "^2.0.3"
+    "tailwindcss": "^2.0.4"
   }
 }
