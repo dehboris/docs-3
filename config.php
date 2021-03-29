@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Str;
 
 return [
     'production' => false,
@@ -8,4 +9,7 @@ return [
     'projectUrl' => 'https://github.com/laravel-filament/filament',
     'collections' => [],
     'navigation' => require_once('navigation.php'),
+    'isActive' => function ($page, $section) {
+        return Str::start($page->getPath(), '/') === $section;
+    },
 ];
