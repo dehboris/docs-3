@@ -23,4 +23,15 @@ Widgets are pure [Laravel Livewire](https://laravel-livewire.com) components, so
 
 ## Disabling the Default Widgets {#disabling-default-widgets}
 
-You may disable the default dashboard widgets by [configuring](/docs#configuration) Filament with `widgets.default.account` and `widgets.default.info` set to false.
+By default two widgets are displayed on the dashboard. These widgets can be disabled by updating the `widgets` section of the [configuration](/docs#configuration) file. Updating the entries to `false` will remove the corresponding widget from the Dashboard.
+
+```php
+  'widgets' => [
+      'namespace' => 'App\\Filament\\Widgets',
+      'path' => app_path('Filament/Widgets'),
+      'default' => [
+          'account' => true, // Change to false to disable account widget
+          'info' => true, // Change to false to disable info widget
+      ],
+  ],
+```
