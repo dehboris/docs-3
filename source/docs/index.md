@@ -91,7 +91,7 @@ Filament implements authorization features in its default users table. Admin use
 To configure columns to granting users admin permissions and roles, you may set the static `$filamentAdminColumn` and `$filamentRolesColumn` properties on your class:
 
 ```php
-public static $filamentUserColumn = 'is_filament_admin'; // The name of a boolean column in your database.
+public static $filamentAdminColumn = 'is_filament_admin'; // The name of a boolean column in your database.
 
 public static $filamentRolesColumn = 'filament_roles'; // The name of a JSON column in your database.
 ```
