@@ -138,6 +138,8 @@ FileUpload::make($name)
     ->visibility($visibility = 'public'); // Set the visibility of uploaded files.
 ```
 
+> Please note, it is the responsibility of the developer to delete these files from the disk if they are removed, as Filament is unaware if they are depended on elsewhere. One way to do this automatically is observing a [model event](https://laravel.com/docs/eloquent#events).
+
 > Support for multiple file uploads is coming soon. For more information, please see our [Development Roadmap](/docs/roadmap).
 
 ### Key-value {#fields-key-value}
