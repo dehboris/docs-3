@@ -131,7 +131,14 @@ php artisan vendor:publish --tag=filament-stubs
 
 ## Upgrade Guide {#upgrade-guide}
 
-To upgrade Filament to the latest version, you must run `php artisan filament:upgrade` command or run the following commands:
+To upgrade Filament to the latest version, you may run:
+
+```bash
+php artisan filament:upgrade
+```
+
+or the following commands manually:
+
 ```bash
 composer update
 php artisan migrate
