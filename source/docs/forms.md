@@ -276,7 +276,7 @@ TextInput::make($name)
 
 Filament provides a number of validation methods that can be applied to fields. Please refer to the [Laravel Validation docs](https://laravel.com/docs/validation#available-validation-rules) if you are unsure about any of these.
 
-```
+```php
 ->acceptedFileTypes($types = []) // Accepts an array of mime types, file upload field only.
 ->confirmed($field = '{field name}Confirmation') // Text-based fields only.
 ->email() // Text input field only.
