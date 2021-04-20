@@ -18,6 +18,7 @@ toc: |
       - [Tags Input](#fields-tags-input)
       - [Textarea](#fields-textarea)
       - [Text Input](#fields-text-input)
+      - [Toggle](#fields-toggle)
   - [Validation](#validation)
   - [Layout](#layout)
       - [Grid](#layout-grid)
@@ -270,6 +271,17 @@ TextInput::make($name)
     ->tel() // Require a valid telephone number to be provided.
     ->type($type = 'text') // Set the input's HTML type.
     ->url(); // Require a valid URL to be provided.
+```
+
+### Toggle {#fields-toggle}
+
+The `onIcon()` and `offIcon()` methods support the name of any Blade icon component, and passes a set of formatting classes to it. By default, the [Blade Heroicons](https://github.com/blade-ui-kit/blade-heroicons) package is installed, so you may use the name of any [Heroicon](https://heroicons.com) out of the box. However, you may create your own custom icon components or install an alternative library if you wish.
+
+```php
+Toggle::make($name)
+    ->autofocus(); // Autofocus the field.
+    ->offIcon(); // Set the icon that should be displayed when the toggle is off.
+    ->onIcon(); // Set the icon that should be displayed when the toggle is on.
 ```
 
 ## Validation {#validation}

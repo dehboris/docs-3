@@ -12,7 +12,6 @@ section: content
 - JSON and relationship-based multi-select
 - JSON array-powered field repeater
 - Block-based page builder
-- Switch
 
 ## Table Filters
 
