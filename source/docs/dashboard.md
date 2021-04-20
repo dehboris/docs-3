@@ -27,11 +27,10 @@ By default two widgets are displayed on the dashboard. These widgets can be disa
 
 ```php
   'widgets' => [
-      'namespace' => 'App\\Filament\\Widgets',
-      'path' => app_path('Filament/Widgets'),
+      // ...
       'default' => [
-          'account' => true, // Change to false to disable account widget
-          'info' => true, // Change to false to disable info widget
+          'account' => false, // Disables the account widget.
+          'info' => false, // Disables the info widget.
       ],
   ],
 ```
