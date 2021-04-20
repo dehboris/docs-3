@@ -79,7 +79,7 @@ public static $filamentUserColumn = 'is_filament_user'; // The name of a boolean
 
 Alternatively, you may override the `canAccessFilament()` on your custom user class, returning a boolean:
 
-```
+```php
 public function canAccessFilament()
 {
     return $this->group === 'Filament Users';
@@ -100,7 +100,7 @@ To disable roles and admin features, just emit these properties from your class.
 
 Alternatively, you may specify custom logic for calculating if a user has admin permissions by overriding the `isFilamentAdmin()` method:
 
-```
+```php
 public function isFilamentAdmin()
 {
     return $this->email === 'dan@danharrin.com';
