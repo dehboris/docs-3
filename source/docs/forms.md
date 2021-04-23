@@ -86,7 +86,9 @@ Field::make($name)
 
 ```php
 Checkbox::make($name)
-    ->autofocus(); // Autofocus the field.
+    ->autofocus() // Autofocus the field.
+    ->inline() // Render the checkbox inline with its label.
+    ->stacked(); // Render the checkbox under its label.
 ```
 
 ### Date Picker {#fields-date-picker}
@@ -279,9 +281,11 @@ The `onIcon()` and `offIcon()` methods support the name of any Blade icon compon
 
 ```php
 Toggle::make($name)
-    ->autofocus(); // Autofocus the field.
-    ->offIcon(); // Set the icon that should be displayed when the toggle is off.
-    ->onIcon(); // Set the icon that should be displayed when the toggle is on.
+    ->autofocus() // Autofocus the field.
+    ->inline() // Render the toggle inline with its label.
+    ->offIcon() // Set the icon that should be displayed when the toggle is off.
+    ->onIcon() // Set the icon that should be displayed when the toggle is on.
+    ->stacked(); // Render the toggle under its label.
 ```
 
 ## Validation {#validation}
