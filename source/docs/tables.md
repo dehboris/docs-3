@@ -126,7 +126,7 @@ Here is an example usage of this column:
 Icon::make('status')
     ->options([
         'heroicon-s-check-circle' => fn ($status) => $status === 'accepted', // When the `status` is `accepted`, render the `check-circle` Heroicon.
-        'heroicon-x-circle' => fn ($status) => $status === 'declined', // When the `status` is `declined`, render the `x-circle` Heroicon.
+        'heroicon-s-x-circle' => fn ($status) => $status === 'declined', // When the `status` is `declined`, render the `x-circle` Heroicon.
         'heroicon-s-clock' => fn ($status) => $status === 'pending', // When the `status` is `pending`, render the `clock` Heroicon.
     ]);
 ```
